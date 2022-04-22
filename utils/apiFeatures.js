@@ -14,19 +14,9 @@ class APIFeatures {
         queryString = queryString.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`)
 
         this.query = this.query.find(JSON.parse(queryString))
-        // let query = Action.find(JSON.parse(queryStr))
         return this
     }
-    sort() {
-        // Sorting 
-        if (this.queryStr.sort) {
-            const sortBy = req.query.sort.split(",").join(" ")
-            this.query = this.query.sort(sortBy)
-        } else {
-            this.query.sort('-dueDate')
-        }
-        return this
-    }
+
     limitFields() {
         //Field Limiting
         if (this.queryStr.fields) {

@@ -17,6 +17,10 @@ const actionSchema = new mongoose.Schema({
         required: [true, "A activity must have a bucket"],
         trim: true
     },
+    startDate:{
+        type: Date,
+        required: [true, "an activity must have a start date"]
+    },
     dueDate: {
         type: Date,
         required: [true, "A activity must have a Due Date"]
