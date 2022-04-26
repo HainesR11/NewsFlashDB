@@ -7,10 +7,14 @@ router
     .route("/")
     .get(GetAllActions)
     .post(CreateNewAction)
+
 router
-    .route("/id")
+    .route("/:id")
     .get(GetAction)
-    .delete(DeleteAction)
+
+router
+    .route("/:id/:taskId")
     .patch(CompleteAction)
+    .delete(DeleteAction)
 
 module.exports = router
