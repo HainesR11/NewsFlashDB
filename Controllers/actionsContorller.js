@@ -104,11 +104,8 @@ exports.CompleteAction = async (req, res) => {
 exports.DeleteTask = async (req, res) => {
     const { id, taskId } = req.params
     try{
-        await Action.findOneAndDelete( id, {$pull: {"tasks": { _id: taskId}}})
-        res.status(204).json({
-            status: 'success',
-            data: null,
-        });
+        const action = await Action.updateOne({ "_id": id }, {$pull:{"tasks": {"_id": taskId}}})
+        res.status(200).send("action removed");
     }
     catch(err){
         res.status(404).json({
