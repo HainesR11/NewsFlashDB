@@ -15,6 +15,5 @@ router
 router
     .route("/:id/:taskId")
     .patch(CompleteAction)
-    .delete(DeleteAction)
 
 module.exports = router

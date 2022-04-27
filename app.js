@@ -3,6 +3,7 @@ const cors = require("cors")
 const morgan = require("morgan")
 const actionRouter = require('./routes/ActionRoutes');
 const bucketRouter = require('./Routes/BucketsRoutes')
+const taskRouter = require('./Routes/TaskRoutes')
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use((req, res, next) => {
 
 app.use('/api/actions', actionRouter)
 app.use('/api/buckets', bucketRouter)
+app.use('/api/tasks', taskRouter)
 
 module.exports = app
