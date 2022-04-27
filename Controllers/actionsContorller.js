@@ -1,3 +1,4 @@
+
 const Action = require("../model/ActionModel")
 const APIFeatures = require("../utils/apiFeatures")
 
@@ -76,9 +77,10 @@ exports.GetAction = async (req, res) => {
 
 
 exports.CompleteAction = async (req, res) => {
-    console.log(req.body)
+    const { id, taskId } = req.params
+    const {completedOn, completedBy} = req.body
     try {
-        const action = Action.findByIdAndUpdate(req.params.id, req.body, {
+        const action = await Action.findOneAndUpdate( {_id: id, "tasks._id": taskId }, {"tasks.$.completedOn": completedOn, "tasks.$.completedBy": completedBy }, {
             new: true,
             runValidators: true
         })
@@ -90,10 +92,28 @@ exports.CompleteAction = async (req, res) => {
         })
     }
     catch (err) {
+        console.log(err)
         res.status(400).json({
             status: "Fail",
             message: "Action not found",
             error: err
+        })
+    }
+}
+
+exports.DeleteTask = async (req, res) => {
+    const { id, taskId } = req.params
+    try{
+        await Action.findOneAndDelete( id, {$pull: {"tasks": { _id: taskId}}})
+        res.status(204).json({
+            status: 'success',
+            data: null,
+        });
+    }
+    catch(err){
+        res.status(404).json({
+            status: "fail",
+            messsage: err
         })
     }
 }
