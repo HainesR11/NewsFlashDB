@@ -1,5 +1,5 @@
 const express = require("express")
-const { GetAllActions, CreateNewAction, GetAction, DeleteAction, CompleteAction } = require("../Controllers/actionsContorller")
+const { GetAllActions, CreateNewAction, GetAction, DeleteTask, CompleteAction } = require("../Controllers/actionsContorller")
 
 const router = express.Router()
 
